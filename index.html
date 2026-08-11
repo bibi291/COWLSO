@@ -1,5 +1,6 @@
 
 
+Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,12 +23,12 @@
 <header class="navbar">
  
     <a href="#home" class="brand">
-
-
-    <div class="logo-rect">
-        <img src="images/logo.png" alt="COWLSO logo">
-    </div>
-</div>
+     
+ 
+            <div class="logo-rect">
+                <!-- REPLACE src WITH YOUR ACTUAL COWLSO LOGO IMAGE -->
+                <img src="images/logo.png" alt="COWLSO logo">
+            </div>
     </a>
  
     <button class="menu-toggle" id="menuToggle">
@@ -36,9 +37,15 @@
  
     <nav id="navMenu">
         <a href="#home">Home</a>
-        <a href="#about">About COWLSO</a>
+        <a href="#about">About</a>
+        <a href="#news">News</a>
+        <a href="#leadership">Leadership</a>
         <a href="#conferences">Conferences</a>
-        <a href="#divisions">Main Division</a>
+        <a href="#divisions">Divisions</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="#donate">Donate</a>
+        <!-- REPLACE href WITH YOUR ACTUAL COMMUNITY FORUM URL -->
+        <a href="https://forum.cowlso.org" target="_blank">Forum</a>
         <a href="#contact">Contact</a>
     </nav>
  
@@ -188,26 +195,26 @@
             <h3>Anthem Lyrics</h3>
             <!-- REPLACE WITH THE ACTUAL LYRICS -->
             <p class="anthem-lyrics-text">
-Okan ni wa, We are One
+                Okan ni wa, We are One
 We are Cowlso, Cowlso
 And we stand, By our husbands
 We are the Mothers of the Land
-
+ 
 We will build, With our hands
 A Lagos filled with greatness, We are strong
 We are Cowlso, Okan ni wa
-
+ 
 We will serve our land, We will stand for our people
 We will rise and together, We will build our homes
 We are strong, We are Cowlso
 Okan ni wa
-
+ 
 Committee of Wives of Lagos State Officials
 Ninu ile re, Obinrin lopo mulero
-
+ 
 Committee of Wives of Lagos State Officials
 Ninu aye yi, Obinrin lopo mulero
-
+ 
 We are strong, We are Cowlso
 Okan ni wa x2
             </p>
@@ -216,6 +223,7 @@ Okan ni wa x2
         <div class="anthem-block" id="motto">
             <h3>Our Motto</h3>
             <p class="motto-phrase">"Okan ni wa"</p>
+            <!-- REPLACE WITH THE ENGLISH MEANING / EXPLANATION -->
             <p>
                 We are one.
             </p>
@@ -272,6 +280,116 @@ Okan ni wa x2
         <span class="story-dot"></span>
         <span class="story-dot"></span>
         <span class="story-dot"></span>
+ 
+    </div>
+ 
+</section>
+ 
+ 
+<!-- ================= NEWS / ARTICLES / PUBLICATIONS ================= -->
+ 
+<section class="news section" id="news">
+ 
+    <div class="section-heading">
+        <span>STAY INFORMED</span>
+        <h2>News &amp; Publications</h2>
+        <div class="heading-line"></div>
+    </div>
+ 
+    <p class="section-intro">
+        Read the latest news, articles and official publications from
+        COWLSO — updates from our conferences, divisions and community
+        initiatives.
+    </p>
+ 
+    <div class="news-controls">
+ 
+        <div class="news-search">
+            <span class="news-search-icon">⌕</span>
+            <input type="text" id="newsSearchInput" placeholder="Search articles...">
+        </div>
+ 
+        <select id="newsSortSelect" class="news-sort">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+        </select>
+ 
+    </div>
+ 
+    <!-- REPLACE these filter tags with your actual categories -->
+    <div class="news-filters" id="newsFilters">
+        <button class="filter-pill active" data-filter="all">All</button>
+        <button class="filter-pill" data-filter="announcements">Announcements</button>
+        <button class="filter-pill" data-filter="events">Events</button>
+        <button class="filter-pill" data-filter="community">Community</button>
+        <button class="filter-pill" data-filter="press">Press</button>
+    </div>
+ 
+    <div class="news-grid" id="newsGrid">
+        <!-- populated by script.js from the newsData array — edit that
+             array to add, remove or edit articles -->
+    </div>
+ 
+    <div class="load-more-wrap">
+        <button class="gold-button" id="loadMoreNews">
+            Load More
+        </button>
+    </div>
+ 
+</section>
+ 
+ 
+<!-- ================= KEY LEADERSHIP ================= -->
+ 
+<section class="leadership section alt-bg" id="leadership">
+ 
+    <div class="section-heading">
+        <span>WHO LEADS US</span>
+        <h2>Key Leadership</h2>
+        <div class="heading-line"></div>
+    </div>
+ 
+    <p class="section-intro">
+        Meet the women guiding COWLSO's mission — hover any photo for
+        their name, role and contact, or search by name below.
+    </p>
+ 
+    <div class="leadership-search">
+        <span class="news-search-icon">⌕</span>
+        <input type="text" id="leadershipSearchInput" placeholder="Search by name...">
+    </div>
+ 
+    <div class="leadership-grid" id="leadershipGrid">
+        <!-- populated by script.js from the leadershipData array — edit
+             that array to add, remove or edit members -->
+    </div>
+ 
+    <div class="load-more-wrap">
+        <button class="gold-button" id="loadMoreLeadership">
+            Load More
+        </button>
+    </div>
+ 
+</section>
+ 
+ 
+<!-- ================= JOIN COWLSO CTA ================= -->
+ 
+<section class="join-cta section">
+ 
+    <div class="join-cta-inner">
+ 
+        <h2>Interested in Joining COWLSO?</h2>
+ 
+        <p>
+            Become part of a community of women creating real impact.
+            Sign up today and start your journey with us.
+        </p>
+ 
+        <!-- REPLACE href WITH YOUR ACTUAL SIGN-UP LINK -->
+        <a href="https://example.com/join" target="_blank" class="gold-button">
+            Sign Up Today
+        </a>
  
     </div>
  
@@ -362,7 +480,7 @@ Okan ni wa x2
  
                     <!-- 2025 -->
  
-                    <a class="year-card" href="C-2025.HTML">
+                    <a class="year-card" href="conference-2025.html">
  
                         <div class="square-lights">
  
@@ -371,7 +489,7 @@ Okan ni wa x2
                             <span class="square-light green"></span>
                             <span class="square-light yellow"></span>
  
-                            <img src="images/2025.jpg"
+                            <img src="images/conference-2025.jpg"
                                  alt="COWLSO 2025">
  
                             <div class="year-overlay">
@@ -627,6 +745,101 @@ Okan ni wa x2
 </section>
  
  
+<!-- ================= AWARDS & ACHIEVEMENTS ================= -->
+ 
+<section class="awards section alt-bg" id="awards">
+ 
+    <div class="section-heading">
+        <span>RECOGNITION</span>
+        <h2>Awards &amp; Achievements</h2>
+        <div class="heading-line"></div>
+    </div>
+ 
+    <div class="awards-grid">
+ 
+        <!-- REPLACE with actual award images and descriptions -->
+        <div class="award-card">
+            <img src="images/award-1.jpg" alt="COWLSO award">
+            <p>Short description of this award or achievement.</p>
+        </div>
+ 
+        <div class="award-card">
+            <img src="images/award-2.jpg" alt="COWLSO award">
+            <p>Short description of this award or achievement.</p>
+        </div>
+ 
+        <div class="award-card">
+            <img src="images/award-3.jpg" alt="COWLSO award">
+            <p>Short description of this award or achievement.</p>
+        </div>
+ 
+    </div>
+ 
+</section>
+ 
+ 
+<!-- ================= DONATE ================= -->
+ 
+<section class="donate section" id="donate">
+ 
+    <div class="donate-inner">
+ 
+        <h2>Support Our Work</h2>
+ 
+        <p>
+            Your donation helps COWLSO continue serving women and
+            communities across Lagos State. Every contribution makes
+            a difference.
+        </p>
+ 
+        <!-- REPLACE href WITH YOUR ACTUAL DONATION LINK -->
+        <a href="https://example.com/donate" target="_blank" class="gold-button donate-button">
+            Donate
+        </a>
+ 
+    </div>
+ 
+</section>
+ 
+ 
+<!-- ================= NEWSLETTER ================= -->
+ 
+<section class="newsletter section alt-bg" id="newsletter">
+ 
+    <div class="newsletter-inner">
+ 
+        <h2>Sign Up to Our Newsletter</h2>
+ 
+        <p>
+            Get COWLSO news, conference updates and division highlights
+            straight to your inbox.
+        </p>
+ 
+        <!-- Mailchimp embedded form — replace action URL with your own
+             Mailchimp list's "post" URL (Audience → Signup forms →
+             Embedded forms), and keep the hidden bot-protection field
+             with the matching u/id values from your embed code. -->
+        <form action="https://YOURDOMAIN.us1.list-manage.com/subscribe/post?u=YOUR_U_ID&amp;id=YOUR_LIST_ID"
+              method="post"
+              target="_blank"
+              class="newsletter-form">
+ 
+            <input type="email" name="EMAIL" placeholder="Your email address" required>
+ 
+            <!-- Mailchimp bot-protection honeypot — leave as-is -->
+            <div style="position:absolute; left:-5000px;" aria-hidden="true">
+                <input type="text" name="b_YOUR_U_ID_YOUR_LIST_ID" tabindex="-1" value="">
+            </div>
+ 
+            <button type="submit" class="gold-button">Subscribe</button>
+ 
+        </form>
+ 
+    </div>
+ 
+</section>
+ 
+ 
 <!-- ================= MAIN DIVISIONS ================= -->
  
 <section class="divisions section" id="divisions">
@@ -680,7 +893,7 @@ Okan ni wa x2
                             healthcare within our communities.
                         </p>
  
-                        <a href="#medical.html" class="text-link">
+                        <a href="medical.html" class="text-link">
                             Explore Division →
                         </a>
  
@@ -716,7 +929,7 @@ Okan ni wa x2
                             service, awareness and collective action.
                         </p>
  
-                        <a href="Cleaning" class="text-link">
+                        <a href="cleaning.html" class="text-link">
                             Explore Division →
                         </a>
  
@@ -826,6 +1039,27 @@ Okan ni wa x2
  
         </div>
  
+        <!-- formsubmit.co contact form — replace YOUREMAIL below with
+             the address you want messages sent to. The first time
+             someone submits, formsubmit.co emails you a confirmation
+             link you must click once to activate it. -->
+        <form action="https://formsubmit.co/YOUREMAIL@example.com" method="POST" class="contact-form">
+ 
+            <span class="contact-form-eyebrow">LEAVE A MESSAGE</span>
+            <h3>We love to hear from you</h3>
+ 
+            <input type="hidden" name="_subject" value="New message from COWLSO website">
+            <input type="hidden" name="_captcha" value="false">
+ 
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="text" name="subject" placeholder="Subject">
+            <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+ 
+            <button type="submit" class="gold-button">Submit</button>
+ 
+        </form>
+ 
     </div>
  
 </section>
@@ -847,6 +1081,8 @@ Okan ni wa x2
  
     <p class="copyright">
         © 2026 COWLSO. All rights reserved.
+        &nbsp;·&nbsp;
+        <a href="privacy.html">Privacy Policy</a>
     </p>
  
 </footer>
