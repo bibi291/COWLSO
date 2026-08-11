@@ -16,31 +16,32 @@
 <body>
 
 <!-- ================= NAVIGATION (same as index.html) ================= -->
- 
+
 <header class="navbar">
- 
-    <a href="#home" class="brand">
 
-
-    <div class="logo-rect">
-        <img src="images/logo.png" alt="COWLSO logo">
-    </div>
-</div>
+    <a href="index.html#home" class="brand">
+            <div class="logo-rect">
+                <img src="images/logo.png" alt="COWLSO logo">
+            </div>
     </a>
- 
+
     <button class="menu-toggle" id="menuToggle">
         ☰
     </button>
- 
+
     <nav id="navMenu">
         <a href="index.html#home">Home</a>
-        <a href="index.html#about">About COWLSO</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#news">News</a>
+        <a href="index.html#leadership">Leadership</a>
         <a href="index.html#conferences">Conferences</a>
-        <a href="index.html#divisions">Main Division</a>
+        <a href="index.html#divisions">Divisions</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="index.html#donate">Donate</a>
+        <a href="https://forum.cowlso.org" target="_blank">Forum</a>
         <a href="index.html#contact">Contact</a>
     </nav>
-    </nav>
- 
+
 </header>
 
 
@@ -48,22 +49,26 @@
 
 <section class="year-hero">
 
-    <span>PAST CONFERENCE</span>
+    <div class="year-hero-slides" id="yearHeroSlides">
+        <!-- REPLACE these 4 with your actual images (25C_1.JPG etc.) —
+             they rotate automatically, no text overlay -->
+        <div class="year-hero-slide active">
+            <img src="images/25C.2.JPG" alt="COWLSO 2025">
+        </div>
+        <div class="year-hero-slide">
+            <img src="images/25C.1.JPG" alt="COWLSO 2025">
+        </div>
+        <div class="year-hero-slide">
+            <img src="images/25C.3.JPG" alt="COWLSO 2025">
+        </div>
+        <div class="year-hero-slide">
+            <img src="images/25C.4.JPG" alt="COWLSO 2025">
+        </div>
+    </div>
 
-    <h1>Conference 2025</h1>
-
-    <p class="theme-tag">Theme: Breaking Boundaries</p>
-
-    <a href="index.html#conferences" class="year-back-link">
+    <a href="index.html#conferences" class="year-back-link year-back-link-floating">
         ← Back to all conferences
     </a>
-
-</section>
-
-<section class="poster-section section">
-
-    <!-- REPLACE src WITH THE ACTUAL 2025 CONFERENCE POSTER -->
-    <img class="poster-img" src="images/poster-2025.jpg" alt="COWLSO 2025 poster — Breaking Boundaries">
 
 </section>
 
@@ -74,20 +79,14 @@
 
     <div class="section-heading">
         <span>THE THEME</span>
-        <h2>Breaking Boundaries</h2>
+        <h2>VISIONARY LEGACY INSPIRING THE NEXT GENERATION</h2>
         <div class="heading-line"></div>
     </div>
 
     <div class="theme-text">
         <!-- REPLACE WITH THE ACTUAL SIGNIFICANCE WRITE-UP -->
         <p>
-            "Breaking Boundaries" speaks to the courage it takes for women
-            to step past the limits placed on them — by tradition, by
-            circumstance, or by self-doubt — and to build community on
-            the other side of that line. The 2025 conference brought
-            together women from different backgrounds, professions and
-            generations to challenge those boundaries together, through
-            honest conversation, shared skills and collective support.
+            "VISIONARY LEGACY INSPIRING THE NEXT GENERATION" speaks about the importance of inspiring the next generation. 
         </p>
     </div>
 
@@ -300,7 +299,7 @@
 </section>
 
 
-<!-- ================= PHOTOS (arrow carousel) ================= -->
+<!-- ================= PHOTOS (grid + load more + download) ================= -->
 
 <section class="media section alt-bg" id="photos">
 
@@ -310,32 +309,60 @@
         <div class="heading-line"></div>
     </div>
 
-    <div class="people-slider">
+    <div class="photo-grid" id="photoGrid">
 
-        <button class="slider-arrow people-prev" data-target="photosTrack">
-            &#10094;
-        </button>
-
-        <div class="people-window">
-
-            <div class="people-track" id="photosTrack">
-
-                <!-- REPLACE with actual conference photos -->
-                <div class="photo-card"><img src="images/photo-1.jpg" alt="COWLSO 2025 photo"></div>
-                <div class="photo-card"><img src="images/photo-2.jpg" alt="COWLSO 2025 photo"></div>
-                <div class="photo-card"><img src="images/photo-3.jpg" alt="COWLSO 2025 photo"></div>
-                <div class="photo-card"><img src="images/photo-4.jpg" alt="COWLSO 2025 photo"></div>
-                <div class="photo-card"><img src="images/photo-5.jpg" alt="COWLSO 2025 photo"></div>
-                <div class="photo-card"><img src="images/photo-6.jpg" alt="COWLSO 2025 photo"></div>
-
-            </div>
-
+        <!-- REPLACE with actual conference photos -->
+        <div class="photo-card">
+            <img src="images/2025.jpg" alt="COWLSO 2025 photo">
+            <a class="photo-download" href="IMAGES/2025.jpg" download title="Download photo">⬇</a>
         </div>
 
-        <button class="slider-arrow people-next" data-target="photosTrack">
-            &#10095;
-        </button>
+        <div class="photo-card">
+            <img src="images/2025.1.jpg" alt="COWLSO 2025 photo">
+            <a class="photo-download" href="images/2025.1.jpg" download title="Download photo">⬇</a>
+        </div>
 
+        <div class="photo-card">
+            <img src="images/2025.2.JPG" alt="COWLSO 2025 photo">
+            <a class="photo-download" href="images/2025.2.JPG" download title="Download photo">⬇</a>
+        </div>
+
+        <div class="photo-card">
+            <img src="images/2025.3.JPG" alt="COWLSO 2025 photo">
+            <a class="photo-download" href="images/2025.3.jpg" download title="Download photo">⬇</a>
+        </div>
+
+        <div class="photo-card">
+            <img src="images/2025.4.JPG" alt="COWLSO 2025 photo">
+            <a class="photo-download" href="images/2025.4.JPG" download title="Download photo">⬇</a>
+        </div>
+
+        <div class="photo-card">
+            <img src="images/photo-6.jpg" alt="COWLSO 2025 photo">
+            <a class="photo-download" href="images/photo-6.jpg" download title="Download photo">⬇</a>
+        </div>
+
+        <div class="photo-card hidden-photo">
+            <img src="images/photo-7.jpg" alt="COWLSO 2025 photo">
+            <a class="photo-download" href="images/photo-7.jpg" download title="Download photo">⬇</a>
+        </div>
+
+        <div class="photo-card hidden-photo">
+            <img src="images/photo-8.jpg" alt="COWLSO 2025 photo">
+            <a class="photo-download" href="images/photo-8.jpg" download title="Download photo">⬇</a>
+        </div>
+
+        <div class="photo-card hidden-photo">
+            <img src="images/photo-9.jpg" alt="COWLSO 2025 photo">
+            <a class="photo-download" href="images/photo-9.jpg" download title="Download photo">⬇</a>
+        </div>
+
+    </div>
+
+    <div class="load-more-wrap">
+        <button class="gold-button" id="loadMorePhotos">
+            Load More
+        </button>
     </div>
 
 </section>
@@ -356,6 +383,7 @@
         <!-- REPLACE href with actual video links -->
         <a class="video-card" href="#" target="_blank">
             <img src="images/video-1.jpg" alt="COWLSO 2025 video">
+            
             <span class="play-icon">►</span>
         </a>
 
@@ -457,47 +485,135 @@
 </section>
 
 
-<!-- ================= CONTACT (same as index.html) ================= -->
+<!-- ================= TESTIMONIALS ================= -->
 
-<section class="contact section" id="contact">
+<section class="testimonials section" id="testimonials">
 
-    <div class="contact-inner">
+    <div class="section-heading light-heading">
+        <span>WHAT PEOPLE ARE SAYING</span>
+        <h2>Testimonials</h2>
+        <div class="heading-line"></div>
+        <p class="testimonials-subtitle">
+            A few words from the women who were part of COWLSO 2025.
+        </p>
+    </div>
 
-        <div class="section-heading light-heading">
-            <span>GET IN TOUCH</span>
-            <h2>Contact COWLSO</h2>
-            <div class="heading-line"></div>
+    <div class="testimonial-slider">
+
+        <div class="testimonial-card side" id="testimonialPrev">
+            <div class="testimonial-avatar">
+                <img src="images/testimonial-1.jpg" alt="Testimonial">
+            </div>
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-quote">Quote goes here.</p>
+            <strong class="testimonial-name">Name</strong>
+            <span class="testimonial-role">Role</span>
         </div>
 
-        <p class="contact-intro">
-            Connect with COWLSO and stay informed about our conferences,
-            activities and upcoming initiatives.
-        </p>
+        <div class="testimonial-card active" id="testimonialActive">
+            <div class="testimonial-avatar">
+                <img src="images/testimonial-2.jpg" alt="Testimonial">
+            </div>
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-quote">Quote goes here.</p>
+            <strong class="testimonial-name">Name</strong>
+            <span class="testimonial-role">Role</span>
+        </div>
 
-        <div class="contact-details">
-
-            <a href="https://instagram.com/" target="_blank" class="contact-item">
-                <span class="contact-icon">◎</span>
-                <div>
-                    <small>FOLLOW US</small>
-                    <strong>Instagram</strong>
-                </div>
-            </a>
-
-            <a href="tel:+2340000000000" class="contact-item">
-                <span class="contact-icon">☎</span>
-                <div>
-                    <small>CALL US</small>
-                    <strong>+234 000 000 0000</strong>
-                </div>
-            </a>
-
+        <div class="testimonial-card side" id="testimonialNext">
+            <div class="testimonial-avatar">
+                <img src="images/testimonial-3.jpg" alt="Testimonial">
+            </div>
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-quote">Quote goes here.</p>
+            <strong class="testimonial-name">Name</strong>
+            <span class="testimonial-role">Role</span>
         </div>
 
     </div>
 
+    <div class="testimonial-dots" id="testimonialDots"></div>
+
 </section>
 
+
+<!-- ================= CONTACT (same as index.html) ================= -->
+
+<section class="contact section" id="contact">
+ 
+    <div class="contact-inner">
+ 
+        <div class="section-heading light-heading">
+ 
+            <span>GET IN TOUCH</span>
+ 
+            <h2>Contact COWLSO</h2>
+ 
+            <div class="heading-line"></div>
+ 
+        </div>
+ 
+ 
+        <p class="contact-intro">
+            Connect with COWLSO and stay informed about our conferences,
+            activities and upcoming initiatives.
+        </p>
+ 
+ 
+        <div class="contact-details">
+ 
+            <a href="https://instagram.com/"
+               target="_blank"
+               class="contact-item">
+ 
+                <span class="contact-icon">◎</span>
+ 
+                <div>
+                    <small>FOLLOW US</small>
+                    <strong>Instagram</strong>
+                </div>
+ 
+            </a>
+ 
+ 
+            <a href="tel:+2340000000000"
+               class="contact-item">
+ 
+                <span class="contact-icon">☎</span>
+ 
+                <div>
+                    <small>CALL US</small>
+                    <strong>+234 000 000 0000</strong>
+                </div>
+ 
+            </a>
+ 
+        </div>
+ 
+        <!-- formsubmit.co contact form — replace YOUREMAIL below with
+             the address you want messages sent to. The first time
+             someone submits, formsubmit.co emails you a confirmation
+             link you must click once to activate it. -->
+        <form action="https://formsubmit.co/YOUREMAIL@example.com" method="POST" class="contact-form">
+ 
+            <span class="contact-form-eyebrow">LEAVE A MESSAGE</span>
+            <h3>We love to hear from you</h3>
+ 
+            <input type="hidden" name="_subject" value="New message from COWLSO website">
+            <input type="hidden" name="_captcha" value="false">
+ 
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="text" name="subject" placeholder="Subject">
+            <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+ 
+            <button type="submit" class="gold-button">Submit</button>
+ 
+        </form>
+ 
+    </div>
+ 
+</section>
 
 <!-- ================= FOOTER ================= -->
 
@@ -515,6 +631,8 @@
 
     <p class="copyright">
         © 2026 COWLSO. All rights reserved.
+        &nbsp;·&nbsp;
+        <a href="privacy.html">Privacy Policy</a>
     </p>
 
 </footer>
