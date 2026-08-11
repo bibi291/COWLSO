@@ -1457,11 +1457,18 @@ footer > p {
     }
 
     .hero {
-        min-height: 85vh;
+        min-height: 60vh;
+    }
+
+    .hero-image {
+        background: #101010;
     }
 
     .hero-image img {
-        object-position: center 30%;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
     }
 
     .hero-content {
