@@ -282,6 +282,7 @@ nav a:hover::after {
 }
 
 .hero-image img {
+    
     height: 100%;
     object-fit: cover;
 }
