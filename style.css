@@ -1679,72 +1679,6 @@ footer > p {
    VIDEOS grid + load more
    ===================================================== */
 
-.video-grid {
-    max-width: 1200px;
-
-    margin: 0 auto 40px;
-
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 25px;
-}
-
-.video-card {
-    position: relative;
-
-    display: block;
-
-    aspect-ratio: 16 / 9;
-
-    overflow: hidden;
-
-    border-radius: 6px;
-}
-
-.video-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-    transition: 0.4s;
-}
-
-.video-card:hover img {
-    transform: scale(1.06);
-    filter: brightness(0.7);
-}
-
-.play-icon {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    width: 54px;
-    height: 54px;
-
-    transform: translate(-50%, -50%);
-
-    background: var(--gold);
-
-    color: white;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 16px;
-
-    padding-left: 3px;
-}
-
-.hidden-video {
-    display: none;
-}
 
 .load-more-wrap {
     text-align: center;
@@ -1928,6 +1862,9 @@ footer > p {
 .year-hero-slide.active {
     opacity: 1;
 }
+
+fake
+
 
 .year-hero-slide img {
     width: 100%;

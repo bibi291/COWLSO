@@ -378,47 +378,108 @@
         <div class="heading-line"></div>
     </div>
 
-    <div class="video-grid" id="videoGrid">
-
-        <!-- REPLACE href with actual video links -->
-        <a class="video-card" href="#" target="_blank">
-            <img src="images/video-1.jpg" alt="COWLSO 2025 video">
-            
-            <span class="play-icon">►</span>
-        </a>
-
-        <a class="video-card" href="#" target="_blank">
-            <img src="images/video-2.jpg" alt="COWLSO 2025 video">
-            <span class="play-icon">►</span>
-        </a>
-
-        <a class="video-card" href="#" target="_blank">
-            <img src="images/video-3.jpg" alt="COWLSO 2025 video">
-            <span class="play-icon">►</span>
-        </a>
-
-        <a class="video-card hidden-video" href="#" target="_blank">
-            <img src="images/video-4.jpg" alt="COWLSO 2025 video">
-            <span class="play-icon">►</span>
-        </a>
-
-        <a class="video-card hidden-video" href="#" target="_blank">
-            <img src="images/video-5.jpg" alt="COWLSO 2025 video">
-            <span class="play-icon">►</span>
-        </a>
-
-        <a class="video-card hidden-video" href="#" target="_blank">
-            <img src="images/video-6.jpg" alt="COWLSO 2025 video">
-            <span class="play-icon">►</span>
-        </a>
-
+ <div class="slider-container">
+    <button class="arrow left" onclick="scrollSlider(-1)">&#10094;</button>
+    
+    <div class="video-slider" id="videoSlider">
+      <div class="video-card">
+        <video src="VIDEOS/dance.mp4" controls></video>
+      </div>
+      <div class="video-card">
+        <video src="dance.mp4" controls></video>
+      </div>
+     <div class="video-card">
+        <video src="AA.mp4" controls></video>
+      </div>
+      <div class="video-card">
+        <video src="BB.mp4" controls></video>
+      </div>
+      <div class="video-card">
+        <video src="CHAKE.mp4" controls></video>
+      </div>
+      <div class="video-card">
+        <video src="CHIKE.mp4" controls></video>
+      </div>
+      <div class="video-card">
+        <video src="RAKE.mp4" controls></video>
+      </div>
     </div>
+    
+    <button class="arrow right" onclick="scrollSlider(1)">&#10095;</button>
+  </div>
 
-    <div class="load-more-wrap">
-        <button class="gold-button" id="loadMoreVideos">
-            Load More
-        </button>
-    </div>
+<style>
+.slider-container {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0 40px;
+  }
+  
+  .video-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+  }
+  
+  .video-card {
+    flex: 0 0 auto;
+    width: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: #fff;
+  }
+  
+  .video-card video {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: hidden;
+    z-index: 5;
+  }
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #281378;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .arrow.left {
+    left: 10px;
+  }
+  
+  .arrow.right {
+    right: 10px;
+  }
+</STyle>
+
+
+<SCript>
+  function scrollSlider(direction) {
+    const slider = document.getElementById('videoSlider');
+    const scrollAmount = 320; // width of video + margin
+    slider.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+</SCript>
+
+
+
+
+
+
+    
+
 
 </section>
 
