@@ -1,0 +1,411 @@
+
+
+
+Medical · HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <title>COWLSO | Nigerian Women Organisation</title>
+ 
+    <link rel="stylesheet" href="style.css">
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+ 
+<body>
+ 
+<!-- ================= NAVIGATION ================= -->
+ 
+<header class="navbar">
+ 
+    <a href="#home" class="brand">
+     
+ 
+            <div class="logo-rect">
+                <!-- REPLACE src WITH YOUR ACTUAL COWLSO LOGO IMAGE -->
+                <img src="images/logo.png" alt="COWLSO logo">
+            </div>
+    </a>
+ 
+    <button class="menu-toggle" id="menuToggle">
+        ☰
+    </button>
+ 
+    <nav id="navMenu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#news">News</a>
+        <a href="#leadership">Leadership</a>
+        <a href="#conferences">Conferences</a>
+        <a href="#divisions">Divisions</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="#donate">Donate</a>
+        <!-- REPLACE href WITH YOUR ACTUAL COMMUNITY FORUM URL -->
+        <a href="https://forum.cowlso.org" target="_blank">Forum</a>
+        <a href="#contact">Contact</a>
+    </nav>
+ 
+</header>
+ 
+<!-- ================= HERO ================= -->
+ 
+<section class="med-hero">
+ 
+    <!-- REPLACE with a real Medical Division photograph -->
+    <img src="images/medical-hero-1.jpg" alt="COWLSO Medical Division">
+ 
+    <div class="med-hero-overlay"></div>
+ 
+    <div class="med-hero-content">
+        <span>COWLSO NIGERIA</span>
+        <h1>Medical Division</h1>
+        <p>Supporting health, wellbeing and access to healthcare within our communities.</p>
+        <a href="#intro" class="med-scroll-cta">Explore Our Work <span>↓</span></a>
+    </div>
+ 
+</section>
+ 
+ 
+<!-- ================= INTRODUCTION ================= -->
+ 
+<section class="med-intro section" id="intro">
+ 
+    <div class="med-intro-grid">
+ 
+        <div class="med-intro-text">
+            <span class="med-eyebrow">WHO WE ARE</span>
+            <h2>Medical Division</h2>
+ 
+            <!-- REPLACE with the actual division write-up -->
+            <p>
+                The Medical Division is COWLSO's hands-on response to
+                healthcare gaps in the communities we serve. Through
+                outreach, screenings, education and direct support, we
+                bring care to people who might otherwise go without it.
+            </p>
+            <p>
+                It isn't about grand gestures — it's about showing up,
+                consistently, with the women and families who need us.
+                Every outreach is planned, staffed and run by COWLSO
+                members who believe healthcare is a community effort.
+            </p>
+        </div>
+ 
+        <div class="med-intro-image">
+            <img src="images/medical-intro.jpg" alt="COWLSO Medical Division community photo">
+        </div>
+ 
+    </div>
+ 
+</section>
+ 
+ 
+<!-- ================= MEDICAL COMMITTEE ================= -->
+ 
+<section class="med-committee section alt-bg">
+ 
+    <div class="section-heading">
+        <span>MEET THE TEAM</span>
+        <h2>Our Medical Committee</h2>
+        <div class="heading-line"></div>
+    </div>
+ 
+    <!-- REPLACE with the actual committee — same hover-card pattern
+         used in Key Leadership on index.html -->
+    <div class="leadership-grid">
+ 
+        <div class="leader-card">
+            <img src="images/med-committee-1.jpg" alt="Committee member">
+            <div class="leader-overlay">
+                <strong>Name Surname</strong>
+                <span>Medical Division Chair</span>
+                <span class="leader-email">chair.medical@cowlso.org</span>
+            </div>
+        </div>
+ 
+        <div class="leader-card">
+            <img src="images/med-committee-2.jpg" alt="Committee member">
+            <div class="leader-overlay">
+                <strong>Name Surname</strong>
+                <span>Outreach Coordinator</span>
+                <span class="leader-email">outreach.medical@cowlso.org</span>
+            </div>
+        </div>
+ 
+        <div class="leader-card">
+            <img src="images/med-committee-3.jpg" alt="Committee member">
+            <div class="leader-overlay">
+                <strong>Name Surname</strong>
+                <span>Volunteer Liaison</span>
+                <span class="leader-email">volunteers.medical@cowlso.org</span>
+            </div>
+        </div>
+ 
+        <div class="leader-card">
+            <img src="images/med-committee-4.jpg" alt="Committee member">
+            <div class="leader-overlay">
+                <strong>Name Surname</strong>
+                <span>Programme Officer</span>
+                <span class="leader-email">programmes.medical@cowlso.org</span>
+            </div>
+        </div>
+ 
+    </div>
+ 
+</section>
+ 
+ 
+<!-- ================= OUR MEDICAL JOURNEY ================= -->
+ 
+<section class="med-journey section" id="journey">
+ 
+    <div class="section-heading">
+        <span>THE ARCHIVE</span>
+        <h2>Our Medical Journey</h2>
+        <div class="heading-line"></div>
+    </div>
+ 
+    <!-- BREADCRUMB -->
+    <nav class="med-breadcrumb" id="medBreadcrumb" aria-label="Breadcrumb"></nav>
+ 
+    <!-- YEAR SELECTOR -->
+    <div class="med-year-tabs" id="medYearTabs">
+        <button class="med-year-tab" data-year="2026">2026</button>
+        <button class="med-year-tab active" data-year="2025">2025</button>
+        <button class="med-year-tab" data-year="2024">2024</button>
+        <button class="med-year-tab" data-year="2023">2023</button>
+    </div>
+ 
+    <!-- YEAR PANEL (content is rendered by script.js from medicalData) -->
+    <div class="med-year-panel" id="medYearPanel"></div>
+ 
+</section>
+ 
+ 
+<!-- ================= SLIDE-OVER PANEL (location / programme) ================= -->
+ 
+<div class="med-overlay" id="medOverlay"></div>
+ 
+<div class="med-slideover" id="medSlideover">
+ 
+    <button class="med-slideover-close" id="medSlideoverClose" aria-label="Close">✕</button>
+ 
+    <div class="med-slideover-scroll" id="medSlideoverContent">
+        <!-- populated by script.js -->
+    </div>
+ 
+</div>
+ 
+ 
+<!-- LIGHTBOX (photos) -->
+<div class="med-lightbox" id="medLightbox">
+    <button class="med-lightbox-close" id="medLightboxClose" aria-label="Close">✕</button>
+    <button class="med-lightbox-arrow med-lightbox-prev" id="medLightboxPrev" aria-label="Previous">&#10094;</button>
+    <img id="medLightboxImg" src="" alt="">
+    <button class="med-lightbox-arrow med-lightbox-next" id="medLightboxNext" aria-label="Next">&#10095;</button>
+ 
+    <div class="med-lightbox-bar">
+        <span id="medLightboxCounter">1 / 1</span>
+        <a id="medLightboxDownload" href="#" download class="med-lightbox-download">Download Image ↓</a>
+    </div>
+</div>
+ 
+ 
+<!-- VIDEO MODAL (portrait) -->
+<div class="med-video-modal" id="medVideoModal">
+    <button class="med-lightbox-close" id="medVideoClose" aria-label="Close">✕</button>
+ 
+    <div class="med-video-frame">
+        <video id="medVideoPlayer" controls playsinline></video>
+    </div>
+ 
+    <a id="medVideoDownload" href="#" download class="med-lightbox-download">Download Video ↓</a>
+</div>
+ 
+ 
+<!-- ================= IMPACT ================= -->
+ 
+<section class="highlights section alt-bg" id="impact">
+ 
+    <div class="section-heading">
+        <span>BY THE NUMBERS</span>
+        <h2>Our Impact</h2>
+        <div class="heading-line"></div>
+    </div>
+ 
+    <!-- REPLACE with real figures when available -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-number" data-target="12">0</span>
+            <p>Medical Programmes</p>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" data-target="2500">0</span>
+            <p>People Reached</p>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" data-target="6">0</span>
+            <p>Communities Served</p>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" data-target="100">0</span>
+            <p>Volunteers</p>
+        </div>
+    </div>
+ 
+</section>
+ 
+ 
+<!-- ================= FEATURED STORY ================= -->
+ 
+<section class="med-featured section">
+ 
+    <div class="section-heading">
+        <span>EDITORIAL</span>
+        <h2>Featured Outreach</h2>
+        <div class="heading-line"></div>
+    </div>
+ 
+    <div class="med-featured-grid">
+ 
+        <div class="med-featured-image">
+            <!-- REPLACE with the actual featured photo -->
+            <img src="images/medical-featured.jpg" alt="Yaba Medical Outreach">
+        </div>
+ 
+        <div class="med-featured-text">
+            <span class="med-eyebrow">2025</span>
+            <h3>Yaba Medical Outreach</h3>
+            <!-- REPLACE with the real story -->
+            <p>
+                In July 2025, COWLSO's Medical Division brought free
+                screenings, consultations and health education directly
+                to the Yaba community — reaching families who don't
+                always have easy access to care. Replace this paragraph
+                with the actual story behind the outreach.
+            </p>
+            <a href="#" class="text-link" id="medFeaturedLink">Explore Story →</a>
+        </div>
+ 
+    </div>
+ 
+</section>
+ 
+ 
+<!-- ================= GALLERY ================= -->
+ 
+<section class="med-gallery section alt-bg" id="gallery">
+ 
+    <div class="section-heading">
+        <span>IN PICTURES</span>
+        <h2>Moments From Our Work</h2>
+        <div class="heading-line"></div>
+    </div>
+ 
+    <!-- REPLACE with real photos — mixed orientations are intentional,
+         nothing here is forced into a fixed aspect ratio -->
+    <div class="med-masonry">
+        <img src="images/med-gallery-1.jpg" alt="COWLSO Medical Division">
+        <img src="images/med-gallery-2.jpg" alt="COWLSO Medical Division">
+        <img src="images/med-gallery-3.jpg" alt="COWLSO Medical Division">
+        <img src="images/med-gallery-4.jpg" alt="COWLSO Medical Division">
+        <img src="images/med-gallery-5.jpg" alt="COWLSO Medical Division">
+        <img src="images/med-gallery-6.jpg" alt="COWLSO Medical Division">
+        <img src="images/med-gallery-7.jpg" alt="COWLSO Medical Division">
+        <img src="images/med-gallery-8.jpg" alt="COWLSO Medical Division">
+    </div>
+ 
+</section>
+ 
+ 
+<!-- ================= CONTACT (same as index.html) ================= -->
+ 
+<section class="contact section" id="contact">
+ 
+    <div class="contact-inner">
+ 
+        <div class="section-heading light-heading">
+            <span>GET IN TOUCH</span>
+            <h2>Contact COWLSO</h2>
+            <div class="heading-line"></div>
+        </div>
+ 
+        <p class="contact-intro">
+            Connect with COWLSO and stay informed about our conferences,
+            activities and upcoming initiatives.
+        </p>
+ 
+        <div class="contact-details">
+ 
+            <a href="https://instagram.com/" target="_blank" class="contact-item">
+                <span class="contact-icon">◎</span>
+                <div>
+                    <small>FOLLOW US</small>
+                    <strong>Instagram</strong>
+                </div>
+            </a>
+ 
+            <a href="tel:+2340000000000" class="contact-item">
+                <span class="contact-icon">☎</span>
+                <div>
+                    <small>CALL US</small>
+                    <strong>+234 000 000 0000</strong>
+                </div>
+            </a>
+ 
+        </div>
+ 
+    </div>
+ 
+</section>
+ 
+ 
+<!-- ================= FOOTER ================= -->
+ 
+<footer>
+ 
+    <div class="footer-logo">COWLSO</div>
+ 
+    <p>Okan ni wa</p>
+ 
+    <div class="footer-line"></div>
+ 
+    <p class="copyright">
+        © 2026 COWLSO. All rights reserved.
+        &nbsp;·&nbsp;
+        <a href="privacy.html">Privacy Policy</a>
+    </p>
+ 
+</footer>
+ 
+ 
+<script src="script4.js"></script>
+ 
+</body>
+</html>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
