@@ -811,21 +811,743 @@ if (leadershipGrid) {
 }
 
 
+/* =====================================================
+   MEDICAL DIVISION — interactive archive
+   ===================================================== */
+
+const medYearPanel = document.getElementById("medYearPanel");
+
+if (medYearPanel) {
+
+    // REPLACE with real COWLSO Medical Division data. Pin positions
+    // (top/left) are percentages within the stylised map box in
+    // index.html's .med-map — adjust them to taste. Photos/videos
+    // arrays take any number of entries.
+    const medicalData = {
+        "2026": { outreach: [], programmes: [] },
+        "2025": {
+            outreach: [
+                {
+                    id: "yaba",
+                    name: "Yaba",
+                    top: "30%",
+                    left: "38%",
+                    date: "July 2025",
+                    description: "COWLSO brought free screenings, consultations and health education directly to the Yaba community, reaching families who don't always have easy access to care.",
+                    image: "images/medical-yaba-1.jpg",
+                    peopleReached: 320,
+                    volunteers: 18,
+                    services: "Screenings, consultations, health education",
+                    photos: [
+                        "images/medical-yaba-1.jpg",
+                        "images/medical-yaba-2.jpg",
+                        "images/medical-yaba-3.jpg",
+                        "images/medical-yaba-4.jpg",
+                        "images/medical-yaba-5.jpg",
+                        "images/medical-yaba-6.jpg"
+                    ],
+                    videos: [
+                        { poster: "images/medical-yaba-video-1.jpg", src: "videos/medical-yaba-1.mp4" },
+                        { poster: "images/medical-yaba-video-2.jpg", src: "videos/medical-yaba-2.mp4" }
+                    ]
+                },
+                {
+                    id: "ikeja",
+                    name: "Ikeja",
+                    top: "48%",
+                    left: "58%",
+                    date: "September 2025",
+                    description: "A full day of maternal health screenings and consultations for women across Ikeja.",
+                    image: "images/medical-ikeja-1.jpg",
+                    peopleReached: 210,
+                    volunteers: 14,
+                    services: "Maternal health screenings",
+                    photos: [
+                        "images/medical-ikeja-1.jpg",
+                        "images/medical-ikeja-2.jpg",
+                        "images/medical-ikeja-3.jpg"
+                    ],
+                    videos: [
+                        { poster: "images/medical-ikeja-video-1.jpg", src: "videos/medical-ikeja-1.mp4" }
+                    ]
+                },
+                {
+                    id: "surulere",
+                    name: "Surulere",
+                    top: "62%",
+                    left: "35%",
+                    date: "November 2025",
+                    description: "Blood pressure and diabetes screening drive with on-site nurses and follow-up referrals.",
+                    image: "images/medical-surulere-1.jpg",
+                    peopleReached: 180,
+                    volunteers: 10,
+                    services: "Blood pressure & diabetes screening",
+                    photos: [
+                        "images/medical-surulere-1.jpg",
+                        "images/medical-surulere-2.jpg"
+                    ],
+                    videos: []
+                }
+            ],
+            programmes: [
+                {
+                    id: "training-workshop",
+                    name: "Medical Training Workshop",
+                    date: "May 2025",
+                    description: "A hands-on workshop equipping volunteer nurses and first-responders with updated emergency care skills.",
+                    image: "images/medical-programme-1.jpg",
+                    photos: ["images/medical-programme-1.jpg", "images/medical-programme-1b.jpg"],
+                    videos: []
+                },
+                {
+                    id: "health-education",
+                    name: "Community Health Education",
+                    date: "June 2025",
+                    description: "In-community sessions on nutrition, hygiene and preventive care for families across Lagos.",
+                    image: "images/medical-programme-2.jpg",
+                    photos: ["images/medical-programme-2.jpg"],
+                    videos: [
+                        { poster: "images/medical-programme-2-video.jpg", src: "videos/medical-programme-2.mp4" }
+                    ]
+                }
+            ]
+        },
+        "2024": { outreach: [], programmes: [] },
+        "2023": { outreach: [], programmes: [] }
+    };
+
+    let medState = { year: "2025", selection: null };
+
+    const medBreadcrumb = document.getElementById("medBreadcrumb");
+    const medYearTabs = document.getElementById("medYearTabs");
+    const medOverlay = document.getElementById("medOverlay");
+    const medSlideover = document.getElementById("medSlideover");
+    const medSlideoverContent = document.getElementById("medSlideoverContent");
+
+    function escapeHtml(str) {
+        const div = document.createElement("div");
+        div.textContent = str || "";
+        return div.innerHTML;
+    }
+
+    /* ---------- BREADCRUMB ---------- */
+
+    function renderBreadcrumb() {
+
+        let html = `<button data-crumb="root">Medical Division</button>`;
+        html += `<span class="med-crumb-sep">/</span>`;
+        html += `<button data-crumb="year">${medState.year}</button>`;
+
+        if (medState.selection) {
+
+            const yearData = medicalData[medState.year];
+
+            if (medState.selection.type === "location") {
+                const loc = yearData.outreach.find(l => l.id === medState.selection.id);
+                html += `<span class="med-crumb-sep">/</span>`;
+                html += `<span class="med-crumb-current">Lagos</span>`;
+                html += `<span class="med-crumb-sep">/</span>`;
+                html += `<span class="med-crumb-current">${escapeHtml(loc ? loc.name : "")}</span>`;
+            } else if (medState.selection.type === "programme") {
+                const prog = yearData.programmes.find(p => p.id === medState.selection.id);
+                html += `<span class="med-crumb-sep">/</span>`;
+                html += `<span class="med-crumb-current">${escapeHtml(prog ? prog.name : "")}</span>`;
+            }
+
+        }
+
+        medBreadcrumb.innerHTML = html;
+
+    }
+
+    medBreadcrumb.addEventListener("click", (e) => {
+
+        const btn = e.target.closest("button[data-crumb]");
+        if (!btn) return;
+
+        closeSlideover();
+
+        if (btn.dataset.crumb === "root" || btn.dataset.crumb === "year") {
+            medState.selection = null;
+            renderBreadcrumb();
+        }
+
+    });
+
+    /* ---------- YEAR PANEL ---------- */
+
+    function buildMapHTML(outreach) {
+
+        if (!outreach.length) {
+            return `<p class="med-empty-note">No medical outreach recorded for this year yet.</p>`;
+        }
+
+        let pins = outreach.map(loc => `
+            <button class="med-map-pin" style="top:${loc.top}; left:${loc.left};" data-loc="${loc.id}">
+                <div class="med-map-tooltip">
+                    <strong>${escapeHtml(loc.name)}</strong>
+                    <span>Medical Outreach<br>${escapeHtml(loc.date)}</span>
+                    <span class="med-map-tooltip-meta">${loc.photos.length} Photos · ${loc.videos.length} Videos</span>
+                </div>
+                <div class="med-map-pin-dot"></div>
+                <div class="med-map-pin-label">${escapeHtml(loc.name)}</div>
+            </button>
+        `).join("");
+
+        return `
+            <div class="med-map-wrap">
+                <div class="med-map">${pins}</div>
+            </div>
+        `;
+
+    }
+
+    function buildProgrammesHTML(programmes) {
+
+        if (!programmes.length) {
+            return `<p class="med-empty-note">No other programmes recorded for this year yet.</p>`;
+        }
+
+        return `
+            <div class="med-programmes-grid">
+                ${programmes.map(p => `
+                    <div class="med-programme-card" data-prog="${p.id}">
+                        <span class="med-programme-date">${escapeHtml(p.date)}</span>
+                        <h4>${escapeHtml(p.name)}</h4>
+                        <p>${escapeHtml(p.description)}</p>
+                        <span class="text-link">Explore Programme →</span>
+                    </div>
+                `).join("")}
+            </div>
+        `;
+
+    }
+
+    function renderYearPanel() {
+
+        const data = medicalData[medState.year] || { outreach: [], programmes: [] };
+
+        medYearPanel.innerHTML = `
+            <div class="med-year-subheading">
+                <span>MEDICAL OUTREACH</span>
+                <h3>Lagos, ${medState.year}</h3>
+            </div>
+            ${buildMapHTML(data.outreach)}
+
+            <div class="med-year-subheading">
+                <span>${medState.year}</span>
+                <h3>Other Programmes</h3>
+            </div>
+            ${buildProgrammesHTML(data.programmes)}
+        `;
+
+    }
+
+    function switchYear(year) {
+
+        if (year === medState.year) return;
+
+        closeSlideover();
+
+        medYearPanel.classList.add("fading");
+
+        setTimeout(() => {
+
+            medState.year = year;
+            medState.selection = null;
+
+            medYearTabs.querySelectorAll(".med-year-tab").forEach(t => {
+                t.classList.toggle("active", t.dataset.year === year);
+            });
+
+            renderYearPanel();
+            renderBreadcrumb();
+
+            medYearPanel.classList.remove("fading");
+
+        }, 200);
+
+    }
+
+    medYearTabs.addEventListener("click", (e) => {
+        const btn = e.target.closest(".med-year-tab");
+        if (btn) switchYear(btn.dataset.year);
+    });
+
+    medYearPanel.addEventListener("click", (e) => {
+
+        const pin = e.target.closest(".med-map-pin");
+        if (pin) {
+            openLocation(pin.dataset.loc);
+            return;
+        }
+
+        const prog = e.target.closest(".med-programme-card");
+        if (prog) {
+            openProgramme(prog.dataset.prog);
+        }
+
+    });
+
+    /* ---------- SLIDE-OVER ---------- */
+
+    function statBlock(value, label) {
+        if (value === undefined || value === null || value === "") return "";
+        return `<div><strong>${escapeHtml(String(value))}</strong><span>${escapeHtml(label)}</span></div>`;
+    }
+
+    function mediaSectionsHTML(item) {
+
+        let html = "";
+
+        html += `<div class="med-slide-section-label">PHOTOS</div>`;
+
+        if (item.photos && item.photos.length) {
+            html += `<div class="med-slide-photo-grid">`;
+            item.photos.forEach((src, i) => {
+                html += `<button data-photo-index="${i}"><img src="${src}" alt="${escapeHtml(item.name)} photo ${i + 1}"></button>`;
+            });
+            html += `</div>`;
+        } else {
+            html += `<p style="color:#999; font-size:13px;">No photos added yet.</p>`;
+        }
+
+        html += `<div class="med-slide-section-label">VIDEOS</div>`;
+
+        if (item.videos && item.videos.length) {
+            html += `<div class="med-slide-video-row">`;
+            item.videos.forEach((v, i) => {
+                html += `
+                    <button class="med-portrait-card" data-video-index="${i}">
+                        <img src="${v.poster}" alt="${escapeHtml(item.name)} video ${i + 1}">
+                        <span class="med-portrait-play">▶</span>
+                    </button>
+                `;
+            });
+            html += `</div>`;
+        } else {
+            html += `<p style="color:#999; font-size:13px;">No videos added yet.</p>`;
+        }
+
+        return html;
+
+    }
+
+    let currentSlideItem = null;
+
+    function openLocation(locId) {
+
+        const yearData = medicalData[medState.year];
+        const loc = yearData.outreach.find(l => l.id === locId);
+        if (!loc) return;
+
+        currentSlideItem = loc;
+        medState.selection = { type: "location", id: locId };
+        renderBreadcrumb();
+
+        medSlideoverContent.innerHTML = `
+            <div class="med-slide-image"><img src="${loc.image}" alt="${escapeHtml(loc.name)} medical outreach"></div>
+            <span class="med-slide-meta">Lagos · ${escapeHtml(loc.date)}</span>
+            <h2>${escapeHtml(loc.name)} Medical Outreach</h2>
+            <p>${escapeHtml(loc.description)}</p>
+            <div class="med-slide-stats">
+                ${statBlock(loc.peopleReached, "People Reached")}
+                ${statBlock(loc.volunteers, "Volunteers")}
+                ${statBlock(loc.services, "Services")}
+            </div>
+            ${mediaSectionsHTML(loc)}
+        `;
+
+        openSlideover();
+
+    }
+
+    function openProgramme(progId) {
+
+        const yearData = medicalData[medState.year];
+        const prog = yearData.programmes.find(p => p.id === progId);
+        if (!prog) return;
+
+        currentSlideItem = prog;
+        medState.selection = { type: "programme", id: progId };
+        renderBreadcrumb();
+
+        medSlideoverContent.innerHTML = `
+            <div class="med-slide-image"><img src="${prog.image}" alt="${escapeHtml(prog.name)}"></div>
+            <span class="med-slide-meta">${escapeHtml(prog.date)}</span>
+            <h2>${escapeHtml(prog.name)}</h2>
+            <p>${escapeHtml(prog.description)}</p>
+            ${mediaSectionsHTML(prog)}
+        `;
+
+        openSlideover();
+
+    }
+
+    function openSlideover() {
+        medOverlay.classList.add("open");
+        medSlideover.classList.add("open");
+        document.body.classList.add("med-no-scroll");
+    }
+
+    function closeSlideover() {
+        medOverlay.classList.remove("open");
+        medSlideover.classList.remove("open");
+        document.body.classList.remove("med-no-scroll");
+    }
+
+    document.getElementById("medSlideoverClose").addEventListener("click", closeSlideover);
+    medOverlay.addEventListener("click", closeSlideover);
+
+    medSlideoverContent.addEventListener("click", (e) => {
+
+        const photoBtn = e.target.closest("[data-photo-index]");
+        if (photoBtn && currentSlideItem) {
+            openLightbox(currentSlideItem.photos, parseInt(photoBtn.dataset.photoIndex, 10));
+            return;
+        }
+
+        const videoBtn = e.target.closest("[data-video-index]");
+        if (videoBtn && currentSlideItem) {
+            openVideo(currentSlideItem.videos[parseInt(videoBtn.dataset.videoIndex, 10)]);
+        }
+
+    });
+
+    /* ---------- LIGHTBOX ---------- */
+
+    const medLightbox = document.getElementById("medLightbox");
+    const medLightboxImg = document.getElementById("medLightboxImg");
+    const medLightboxCounter = document.getElementById("medLightboxCounter");
+    const medLightboxDownload = document.getElementById("medLightboxDownload");
+
+    let lightboxPhotos = [];
+    let lightboxIndex = 0;
+
+    function renderLightbox() {
+        const src = lightboxPhotos[lightboxIndex];
+        medLightboxImg.src = src;
+        medLightboxCounter.textContent = `${lightboxIndex + 1} / ${lightboxPhotos.length}`;
+        medLightboxDownload.href = src;
+    }
+
+    function openLightbox(photos, index) {
+        lightboxPhotos = photos;
+        lightboxIndex = index;
+        renderLightbox();
+        medLightbox.classList.add("open");
+    }
+
+    function closeLightbox() {
+        medLightbox.classList.remove("open");
+    }
+
+    document.getElementById("medLightboxClose").addEventListener("click", closeLightbox);
+
+    document.getElementById("medLightboxPrev").addEventListener("click", () => {
+        lightboxIndex = (lightboxIndex - 1 + lightboxPhotos.length) % lightboxPhotos.length;
+        renderLightbox();
+    });
+
+    document.getElementById("medLightboxNext").addEventListener("click", () => {
+        lightboxIndex = (lightboxIndex + 1) % lightboxPhotos.length;
+        renderLightbox();
+    });
+
+    /* ---------- VIDEO MODAL ---------- */
+
+    const medVideoModal = document.getElementById("medVideoModal");
+    const medVideoPlayer = document.getElementById("medVideoPlayer");
+    const medVideoDownload = document.getElementById("medVideoDownload");
+
+    function openVideo(video) {
+        if (!video) return;
+        medVideoPlayer.src = video.src;
+        medVideoDownload.href = video.src;
+        medVideoModal.classList.add("open");
+        medVideoPlayer.play().catch(() => {});
+    }
+
+    function closeVideo() {
+        medVideoPlayer.pause();
+        medVideoPlayer.currentTime = 0;
+        medVideoModal.classList.remove("open");
+    }
+
+    document.getElementById("medVideoClose").addEventListener("click", closeVideo);
+
+    /* ---------- keyboard support ---------- */
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            closeLightbox();
+            closeVideo();
+            closeSlideover();
+        }
+        if (medLightbox.classList.contains("open")) {
+            if (e.key === "ArrowLeft") document.getElementById("medLightboxPrev").click();
+            if (e.key === "ArrowRight") document.getElementById("medLightboxNext").click();
+        }
+    });
+
+    /* ---------- FEATURED STORY LINK ---------- */
+
+    const medFeaturedLink = document.getElementById("medFeaturedLink");
+    if (medFeaturedLink) {
+        medFeaturedLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.getElementById("journey").scrollIntoView({ behavior: "smooth" });
+            if (medState.year !== "2025") switchYear("2025");
+            setTimeout(() => openLocation("yaba"), 350);
+        });
+    }
+
+    /* ---------- INIT ---------- */
+
+    renderYearPanel();
+    renderBreadcrumb();
+
+}
 
 
-/* =========================================================
-   COWLSO MEDICAL DIVISION
-   INTERACTIVE ARCHIVE
-========================================================= */
+/* =====================================================
+   CONFERENCE 2026 — flip-clock countdown
+   ===================================================== */
+
+const flipClock = document.getElementById("flipClock");
+
+if (flipClock) {
+
+    // REPLACE with the confirmed 2026 conference date/time if it changes
+    const countdownTarget = new Date("2026-10-22T09:00:00+01:00").getTime();
+
+    const flipDays = document.getElementById("flipDays").querySelector("span");
+    const flipHours = document.getElementById("flipHours").querySelector("span");
+    const flipMinutes = document.getElementById("flipMinutes").querySelector("span");
+    const flipSeconds = document.getElementById("flipSeconds").querySelector("span");
+
+    const cards = {
+        days: document.getElementById("flipDays"),
+        hours: document.getElementById("flipHours"),
+        minutes: document.getElementById("flipMinutes"),
+        seconds: document.getElementById("flipSeconds")
+    };
+
+    const prevValues = { days: null, hours: null, minutes: null, seconds: null };
+
+    function pad(n) {
+        return String(n).padStart(2, "0");
+    }
+
+    function setUnit(cardEl, span, key, value) {
+
+        const padded = pad(value);
+
+        if (prevValues[key] !== null && prevValues[key] !== padded) {
+            cardEl.classList.remove("flipping");
+            // force reflow so the animation can restart
+            void cardEl.offsetWidth;
+            cardEl.classList.add("flipping");
+        }
+
+        prevValues[key] = padded;
+        span.textContent = padded;
+
+    }
+
+    function tickCountdown() {
+
+        const now = Date.now();
+        const distance = countdownTarget - now;
+
+        if (distance <= 0) {
+
+            flipClock.classList.add("hide");
+            document.getElementById("conf26CountdownDone").classList.add("show");
+
+            clearInterval(countdownInterval);
+            return;
+
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        setUnit(cards.days, flipDays, "days", days);
+        setUnit(cards.hours, flipHours, "hours", hours);
+        setUnit(cards.minutes, flipMinutes, "minutes", minutes);
+        setUnit(cards.seconds, flipSeconds, "seconds", seconds);
+
+    }
+
+    tickCountdown();
+    const countdownInterval = setInterval(tickCountdown, 1000);
+
+}
 
 
-/* =========================================================
-   MEDICAL DATA
-=========================================================
+/* =====================================================
+   CONFERENCE 2026 — CENTRAL DATA
+   Edit prices/dates/date/theme here only — everything on the
+   page renders from this object. Gala Night is included free
+   for conference ticket holders; the fee applies to exhibitors
+   only (see registration.exhibition.galaAccess).
+   ===================================================== */
 
-   IMPORTANT:
+const conferenceData = {
 
-   Replace all example content with verified COWLSO data.MEDICINE
+    date: "22 October 2026",
 
-========================================================= */
+    theme: "25 Years of Visionary Legacy, Inspiring the Next Generation",
 
+    registration: {
+
+        physical: {
+            standard: "₦150,000",
+            late: "₦165,000",
+            standardDates: "20 September – 15 October",
+            lateDates: "16 October – 24 October",
+            galaIncluded: true
+        },
+
+        virtual: {
+            standard: "₦40,000",
+            late: "₦40,000",
+            standardDates: "20 September – 15 October",
+            lateDates: "16 October – 24 October"
+        },
+
+        exhibition: {
+            backStall: "₦250,000",
+            frontStall: "₦300,000",
+            galaAccess: "₦50,000"
+        }
+
+    }
+
+};
+
+const conf26RegisterSection = document.getElementById("register");
+
+if (conf26RegisterSection) {
+
+    function setText(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+    }
+
+    const reg = conferenceData.registration;
+
+    // timeline (shared dates, taken from the physical tier)
+    setText("timelineStandardDates", reg.physical.standardDates.toUpperCase());
+    setText("timelineLateDates", reg.physical.lateDates.toUpperCase());
+
+    // physical pass
+    setText("physicalStandardPrice", reg.physical.standard);
+    setText("physicalStandardDates", reg.physical.standardDates);
+    setText("physicalLatePrice", reg.physical.late);
+    setText("physicalLateDates", reg.physical.lateDates);
+
+    // virtual pass
+    setText("virtualStandardPrice", reg.virtual.standard);
+    setText("virtualStandardDates", reg.virtual.standardDates);
+    setText("virtualLatePrice", reg.virtual.late);
+    setText("virtualLateDates", reg.virtual.lateDates);
+
+    // gala — exhibitor-only fee, shown in the Gala Night section,
+    // the Exhibition Booth section, and the FAQ
+    setText("galaAudiencePrice", reg.exhibition.galaAccess);
+    setText("exhibitorGalaPrice", reg.exhibition.galaAccess);
+    setText("faqExhibitorGala", reg.exhibition.galaAccess);
+    setText("faqExhibitorGala2", reg.exhibition.galaAccess);
+
+    // exhibition stalls
+    setText("backStallPrice", reg.exhibition.backStall);
+    setText("frontStallPrice", reg.exhibition.frontStall);
+    setText("faqBackStall", reg.exhibition.backStall);
+    setText("faqFrontStall", reg.exhibition.frontStall);
+
+    // FAQ fee summary
+    setText("faqPhysicalStandard", reg.physical.standard);
+    setText("faqPhysicalLate", reg.physical.late);
+    setText("faqVirtualStandard", reg.virtual.standard);
+    setText("faqVirtualLate", reg.virtual.late);
+
+}
+
+
+/* =====================================================
+   CONFERENCE 2026 — FAQ ACCORDION
+   ===================================================== */
+
+const conf26FaqList = document.getElementById("conf26FaqList");
+
+if (conf26FaqList) {
+
+    conf26FaqList.querySelectorAll(".conf26-faq-item").forEach(item => {
+
+        const question = item.querySelector(".conf26-faq-question");
+        const answer = item.querySelector(".conf26-faq-answer");
+
+        question.addEventListener("click", () => {
+
+            const isOpen = item.classList.contains("open");
+
+            // close any other open item (accordion behaviour)
+            conf26FaqList.querySelectorAll(".conf26-faq-item.open").forEach(openItem => {
+                if (openItem !== item) {
+                    openItem.classList.remove("open");
+                    openItem.querySelector(".conf26-faq-answer").style.maxHeight = null;
+                }
+            });
+
+            if (isOpen) {
+                item.classList.remove("open");
+                answer.style.maxHeight = null;
+            } else {
+                item.classList.add("open");
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            }
+
+        });
+
+        question.setAttribute("aria-expanded", "false");
+        question.setAttribute("role", "button");
+        question.setAttribute("tabindex", "0");
+
+        question.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                question.click();
+            }
+        });
+
+    });
+
+}
+
+
+/* =====================================================
+   CONFERENCE 2026 — WHAT TO EXPECT (scroll reveal)
+   ===================================================== */
+
+const conf26ExpectItems = document.querySelectorAll(".conf26-expect-item");
+
+if (conf26ExpectItems.length) {
+
+    const expectObserver = new IntersectionObserver((entries, observer) => {
+
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                observer.unobserve(entry.target);
+            }
+        });
+
+    }, { threshold: 0.3 });
+
+    conf26ExpectItems.forEach(item => expectObserver.observe(item));
+
+}
